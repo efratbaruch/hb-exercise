@@ -5,14 +5,12 @@ import java.time.format.DateTimeFormatter
 
 class DateUtils {
 
-    fun convertLocalDateToStringFormat(localDate: LocalDate) : String {
+    fun convertLocalDateToStringFormat(localDate: LocalDate): String {
         val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
         return localDate.format(formatter)
     }
 
-    //todo: improve return
     private fun convertStringDateToLocalDate(strDate: String): LocalDate {
-
         val paddedDate = formatPaddedDate(strDate)
         val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
 

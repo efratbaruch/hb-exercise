@@ -5,7 +5,7 @@ import org.openqa.selenium.NoSuchElementException
 import org.openqa.selenium.WebElement
 import util.Driver.driver
 
-object TranslationPopUpLocators{
+object TranslationPopUpLocators {
     const val TRANSLATION_ANNOUNCE_CLOSE_BUTTON_CSS = "button[aria-label='Close']"
 }
 
@@ -14,7 +14,9 @@ class TranslationPopUp {
     val closeButton: WebElement
         get() = driver.findElement(By.cssSelector(TranslationPopUpLocators.TRANSLATION_ANNOUNCE_CLOSE_BUTTON_CSS))
 
-    fun closeTranslationPopUp(){
+    // On most of the listings a translation pop up appears and this method checks if that is the case,
+    // and handles it.
+    fun closeTranslationPopUp() {
         // Wait for pop-up to appear on screen. Implicit wait is not possible since active window is the background screen
         Thread.sleep(3000)
 

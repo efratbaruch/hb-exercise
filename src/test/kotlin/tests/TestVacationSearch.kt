@@ -3,10 +3,12 @@ package tests
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.testng.Assert
 import org.testng.annotations.Test
-import util.*
 import util.Driver.driver
 import util.Driver.wait
-import java.net.URI
+import util.GuestGroup
+import util.PageAndBlockInit
+import util.UrlUtils
+import util.VacationParameters
 import java.time.LocalDate
 
 object TestVacationSearchConst {
@@ -15,14 +17,10 @@ object TestVacationSearchConst {
 
 class TestVacationSearch : PageAndBlockInit() {
 
-    //todo: handle all the waits
-    //todo: run headless
-    //todo: go over naming for all
-    //todo: go over all classes and tidy
-    //todo: go over everything and add comments where appropriate
+    // Normally, I would have divided this test scenario to smaller tests to improve stability.
     @Test
     fun testVacationSearch() {
-        // Arrange: Navigate to page & prepare data for test
+        // Arrange: Navigate to page & prepare vacation data for test
         UrlUtils().openPage(TestVacationSearchConst.URL)
 
         var vacationParameters =
@@ -44,7 +42,7 @@ class TestVacationSearch : PageAndBlockInit() {
         vacationSearchBlocks.searchForStay(vacationParameters)
 
         // Act: Select a Listing
-        listingSortingBlocks.clickHighestRateListing()
+        searchResultsBlocks.clickHighestRateListing()
 
         // Act: Confirm Booking Details
         translationPopUp.closeTranslationPopUp()
@@ -58,7 +56,8 @@ class TestVacationSearch : PageAndBlockInit() {
         Assert.assertTrue(listingDetailsBlocks.isNumOfGuestsCorrect(secondVacationParameters.guestGroup))
         vacationParameters.guestGroup = secondVacationParameters.guestGroup
 
-        // Act: Change Booking Dates and confirm changes
+        // Act: Change Booking Dates and confirm changes. If the change failed the previous dates
+        // are reselected.
         if (listingDetailsBlocks.changeDatesIfAvailableAndVerify(secondVacationParameters)) {
             vacationParameters = secondVacationParameters
         } else {

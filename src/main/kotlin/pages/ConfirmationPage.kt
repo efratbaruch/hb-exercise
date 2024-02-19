@@ -27,7 +27,7 @@ class ConfirmationPage() {
         return UrlUtils().isPageUrlPathCorrect(ConfirmationPageConst.PAGE_URL_PATH, pageUri)
     }
 
-    //todo: consider opening up for all kinds of guests
+    // This method treats only number of adults but can be expanded to check all vacation params
     fun isAdultNumberCorrectOnUrl(numOfAdultGuests: String): Boolean {
         return UrlUtils().isQueryParamCorrect(pageUri, ConfirmationPageConst.ADULTS_QUERY_PARAM, numOfAdultGuests)
     }

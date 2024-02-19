@@ -6,15 +6,17 @@ import util.Driver.driver
 
 class ElementLocator() {
 
-    fun findStableElement(locator : By, maxAttempt: Int = 5): WebElement{
-        var count : Int = 0
+    // This method purpose is an attempt to prevent the StaleElementReferenceException that sometimes
+    // is thrown at the beginning of the test scenario.
+    fun findStableElement(locator: By, maxAttempt: Int = 5): WebElement {
+        var count = 0
         do {
             try {
                 return driver.findElement(locator)
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 count++
             }
-        } while(count<=maxAttempt)
+        } while (count <= maxAttempt)
         return driver.findElement(locator)
     }
 }

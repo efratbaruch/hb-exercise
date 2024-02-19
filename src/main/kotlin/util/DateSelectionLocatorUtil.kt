@@ -8,15 +8,20 @@ object DateElementsUtilConst {
     const val DATE_LOCATOR_CSS_SUFFIX = "']"
 }
 
-class DateLocatorUtil {
+class DateSelectionLocatorUtil {
 
-    fun getDateByLocator(date: LocalDate = LocalDate.now(), daysToAdd: Long) : By {
+    // This class creates a dynamic locator for date selection adding the chosen date to the
+    // css selector locator, and returns the By.cssSelector locator.
+    fun getDateByLocator(date: LocalDate = LocalDate.now(), daysToAdd: Long): By {
         return By.cssSelector(getDateStringLocator(date, daysToAdd))
     }
 
     private fun getDateStringLocator(date: LocalDate = LocalDate.now(), daysToAdd: Long): String {
         val dateCssLocatorString: String =
-            DateElementsUtilConst.DATE_LOCATOR_CSS_PREFIX + createVacationRelativeDates(date, daysToAdd) + DateElementsUtilConst.DATE_LOCATOR_CSS_SUFFIX
+            DateElementsUtilConst.DATE_LOCATOR_CSS_PREFIX + createVacationRelativeDates(
+                date,
+                daysToAdd
+            ) + DateElementsUtilConst.DATE_LOCATOR_CSS_SUFFIX
 
         return dateCssLocatorString
     }
